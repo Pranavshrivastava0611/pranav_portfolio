@@ -48,10 +48,10 @@
   --spacing-gutter: 24px;
 
   /* Animations */
-  --animate-monitor-glow: monitor-glow 5s infinite;
+  --animate-monitor-glow: none;
   --animate-noise: noise 0.2s infinite steps(2);
   --animate-pulse-glow: pulse-glow 4s ease-in-out infinite;
-  --animate-flicker: flicker 0.3s infinite alternate;
+  --animate-flicker: none;
   --animate-drift: drift 20s ease-in-out infinite;
   --animate-scan: scan 8s linear infinite;
   --animate-glitch: glitch 0.3s ease-in-out;
@@ -381,12 +381,12 @@ body {
 }
 
 .stranger-flicker-ambient {
-  animation: stranger-ambient-flicker 5s infinite;
+  opacity: 0.08;
 }
 
 /* Cinematic screen wide flicker */
 .cinematic-screen-flicker {
-  animation: screen-flicker 14s infinite;
+  filter: brightness(1) contrast(1) saturate(1);
 }
 
 @keyframes screen-flicker {

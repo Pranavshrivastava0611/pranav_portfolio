@@ -12,11 +12,13 @@ import { ActiveScreen, Project, UserBadge } from '@/types';
 import { SHOWCASE_PROJECTS } from '@/data';
 import { ArrowRight, Cpu, Layers, Trophy } from 'lucide-react';
 import NetflixIntro from '@/components/NetflixIntro';
+import DdBattleModal from '@/components/DdBattleModal';
 
 
 export default function Home() {
   const [activeScreen, setActiveScreen] = React.useState<ActiveScreen>('HOME');
   const [selectedProject, setSelectedProject] = React.useState<Project | null>(null);
+  const [isDdGameOpen, setIsDdGameOpen] = React.useState(false);
   const [showIntro, setShowIntro] = React.useState(true);
 
 
@@ -119,6 +121,7 @@ export default function Home() {
                   }
                 }}
                 onJoinParty={() => setActiveScreen('CONTACT')}
+                onPlayGame={() => setIsDdGameOpen(true)}
               />
 
               {/* Rift Divider */}
@@ -358,12 +361,15 @@ export default function Home() {
 
         </div>
       </footer>
-
-      {/* Project Modal */}
-      {selectedProject && (
-        <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
-      )}
     </div>
+
+    {/* Project Modal */}
+    {selectedProject && (
+      <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+    )}
+
+    {/* D&D Battle Easter Egg Modal */}
+    <DdBattleModal isOpen={isDdGameOpen} onClose={() => setIsDdGameOpen(false)} />
   </>
 );
 }

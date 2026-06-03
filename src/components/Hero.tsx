@@ -1,14 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, Terminal } from "lucide-react";
+import { ArrowRight, Terminal, Sparkles } from "lucide-react";
 
 interface HeroProps {
   onEnterRift: () => void;
   onJoinParty: () => void;
+  onPlayGame?: () => void;
 }
 
-export default function Hero({ onEnterRift, onJoinParty }: HeroProps) {
+export default function Hero({ onEnterRift, onJoinParty, onPlayGame }: HeroProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [frequency, setFrequency] = useState(47.3);
 
@@ -139,12 +140,21 @@ export default function Hero({ onEnterRift, onJoinParty }: HeroProps) {
       id="hero"
       className="relative min-h-[90vh] flex items-center justify-center overflow-hidden vignette pt-16"
     >
+      {/* Stranger Things Background Image */}
+      <div
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-[0.25] pointer-events-none"
+        style={{
+          backgroundImage: "url('/stranger_things_bg.png')",
+        }}
+        aria-hidden="true"
+      />
+
       {/* Atmospheric mist - Radial red glow */}
       <div
         className="absolute inset-0 z-0 stranger-flicker-ambient"
         style={{
           background:
-            "radial-gradient(ellipse at center, rgba(227,24,55,0.08) 0%, transparent 60%)",
+            "radial-gradient(ellipse at center, rgba(227,24,55,0.1) 0%, transparent 60%)",
           filter: "blur(48px)",
         }}
         aria-hidden="true"
@@ -247,10 +257,17 @@ export default function Hero({ onEnterRift, onJoinParty }: HeroProps) {
             <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
           </button>
           <button
-            onClick={onJoinParty}
-            className="px-8 py-4 border border-on-surface-variant hover:border-primary hover:text-primary text-on-surface-variant font-mono text-xs font-bold uppercase tracking-[0.1em] transition-all active:scale-95 cursor-pointer"
+            onClick={onPlayGame}
+            className="group flex items-center gap-2 px-6 py-4 border border-primary text-[#fffaf9]/90 hover:text-primary font-mono text-xs font-bold uppercase tracking-[0.1em] transition-all active:scale-95 cursor-pointer hover:shadow-[0_0_15px_rgba(227,24,55,0.35)]"
           >
-            SECURE CLEARANCE BADGE
+            <Sparkles size={14} className="text-primary animate-pulse" />
+            <span>ROLL FOR INITIATIVE (D20)</span>
+          </button>
+          <button
+            onClick={onJoinParty}
+            className="px-6 py-4 border border-on-surface-variant hover:border-primary hover:text-primary text-on-surface-variant font-mono text-xs font-bold uppercase tracking-[0.1em] transition-all active:scale-95 cursor-pointer"
+          >
+            SECURE BADGE
           </button>
         </div>
       </div>
